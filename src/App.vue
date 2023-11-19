@@ -2,12 +2,23 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import Greet from "./components/Greet.vue";
+import { invoke } from '@tauri-apps/api'
+
+function check() {
+  // 调用命令
+  // 在应用窗口中右键，打开开发者工具
+  // 你会看到控制台上输出了 "Hello, World!"！
+  invoke('greet', { name: 'World' })
+    // `invoke` 返回的是一个 Promise
+    .then((response) => console.log(response))
+}
 </script>
 
 <template>
   <div class="container">
     <h1>Welcome to Tauri ! 奥利给！</h1><br>
     <a href="https://www.baidu.com">百度跳转</a>
+    <el-button @click="check()" type="success">运行！</el-button>
 
     <div class="row">
       <a href="https://vitejs.dev" target="_blank">
